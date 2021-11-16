@@ -1,7 +1,8 @@
 #!/usr/bin/python3.6
 
 '''
-    Description:
+    Description: Representación gráfica de el conjunto solución para una inecuación.
+		 Mejoras y debug en https://github.com/Cheva94/misc/blob/master/shadow-Xaxis.py
     Written by: Ignacio J. Chevallier-Boutell.
     Dated: November, 2021.
 '''
@@ -51,12 +52,18 @@ def main():
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+
     elif include == 'right':
         circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
         circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='tab:orange', clip_on=True, zorder=5)
 
         ax.add_patch(circleL)
         ax.add_patch(circleR)
+
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
 
     elif include == 'both':
         circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='tab:orange', clip_on=True, zorder=5)
@@ -65,6 +72,9 @@ def main():
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+
     elif include == 'none':
         circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
         circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
@@ -72,6 +82,9 @@ def main():
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        
     else:
         print('Elegir alguna de las opciones: left, right, both o none para indicar el relleno de los círculos para inclusión.')
 
