@@ -42,7 +42,7 @@ def main():
 
     fig, ax = plt.subplots()
 
-    shadow=Rectangle((np.min([xsol[0], xlim[0]]),-3), np.abs(xsol[1]-xsol[0]), 6, fc='tab:orange', alpha=0.3, clip_on=False, zorder=1)
+    shadow=Rectangle((xsol[0],-3), np.abs(xsol[1]-xsol[0]), 6, fc='tab:orange', alpha=0.3, clip_on=False, zorder=1)
     ax.add_patch(shadow)
 
     if include == 'left':
@@ -84,7 +84,7 @@ def main():
 
         ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
         ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
-        
+
     else:
         print('Elegir alguna de las opciones: left, right, both o none para indicar el relleno de los círculos para inclusión.')
 
