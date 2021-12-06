@@ -32,38 +32,34 @@ plt.rcParams["figure.autolayout"] = True
 
 def main():
 
-    # Files = args.input
-    # Labels = args.labels
-    # Saving = args.output
-
     xlim = args.xlim
     xsol = args.xsol
     include = args.include
 
     fig, ax = plt.subplots()
 
-    shadow=Rectangle((xsol[0],-3), np.abs(xsol[1]-xsol[0]), 6, fc='tab:orange', alpha=0.3, clip_on=False, zorder=1)
+    shadow=Rectangle((xsol[0],-3), np.abs(xsol[1]-xsol[0]), 6, fc='tab:orange', alpha=0.5, clip_on=False, zorder=1)
     ax.add_patch(shadow)
 
     if include == 'left':
         circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='tab:orange', clip_on=True, zorder=5)
-        circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
+        circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='white', lw=5, clip_on=True, zorder=5)
 
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
-        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
-        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0]-2, 4), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 4), zorder=10)
 
     elif include == 'right':
-        circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
+        circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', lw=5, clip_on=True, zorder=5)
         circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='tab:orange', clip_on=True, zorder=5)
 
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
-        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
-        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 4), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1]-2, 4), zorder=10)
 
     elif include == 'both':
         circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='tab:orange', clip_on=True, zorder=5)
@@ -72,18 +68,18 @@ def main():
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
-        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
-        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0]-2, 4), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1]-2, 4), zorder=10)
 
     elif include == 'none':
-        circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
-        circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='white', clip_on=True, zorder=5)
+        circleL = Circle((xsol[0], 0), radius=1, ec='tab:orange', fc='white', lw=5, clip_on=True, zorder=5)
+        circleR = Circle((xsol[1], 0), radius=1, ec='tab:orange', fc='white', lw=5, clip_on=True, zorder=5)
 
         ax.add_patch(circleL)
         ax.add_patch(circleR)
 
-        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
-        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 5), arrowprops=dict(facecolor='mediumseagreen', shrink=0.05), zorder=10)
+        ax.annotate(xsol[0], (xsol[0], 0), xytext=(xsol[0], 4), zorder=10)
+        ax.annotate(xsol[1], (xsol[1], 0), xytext=(xsol[1], 4), zorder=10)
 
     else:
         print('Elegir alguna de las opciones: left, right, both o none para indicar el relleno de los círculos para inclusión.')
@@ -104,7 +100,7 @@ if __name__ == "__main__":
 
     parser.add_argument('xlim', help = "Valores mínimo y máximo para plotear el eje x.", nargs = 2, type=int)
 
-    parser.add_argument('xsol', help = "Valores mínimo y máximo de la solución. Si es -inf, escribir un valor menor al mínimo de xlim. Si es +inf, escribir un valor mayor al máximo de xlim.", nargs = 2, type=int)
+    parser.add_argument('xsol', help = "Valores mínimo y máximo de la solución. Si es -inf, escribir un valor menor al mínimo de xlim. Si es +inf, escribir un valor mayor al máximo de xlim.", nargs = 2, type=float)
 
     parser.add_argument('include', help = 'Indicar si debe rellenar el círculo de la izquierda (left), de la derecha (right), ambos (both) o ninguno (none).')
 
