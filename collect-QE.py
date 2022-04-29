@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.9
 
 '''
     Description: extracts QE output data for scf, relax or dynamics calculations.
@@ -127,11 +127,11 @@ if __name__ == "__main__":
 
     parser.add_argument('input_file', nargs = '+', help = "Path to the output file.")
 
-    parser.add_argument('-dyn', '--dynamics', action = 'store_true', help = "For dynamics.")
+    parser.add_argument('-dyn', '--dynamics', action = 'store_true', help = "Extracts time, temperature and energy from dynamics.")
 
-    parser.add_argument('-o2a', '--pwo2xsf', action = 'store_true', help = "Coordinates extraction.")
+    parser.add_argument('-o2a', '--pwo2xsf', action = 'store_true', help = "Extracts coordinates from dynamics.")
 
-    parser.add_argument('-ste', '--solvent', action = 'store_true', help = "No smearing.")
+    parser.add_argument('-ste', '--solvent', action = 'store_true', help = "Just solvent. No smearing.")
 
     args = parser.parse_args()
 
