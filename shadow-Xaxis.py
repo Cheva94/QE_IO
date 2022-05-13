@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.10
 
 '''
     Description: Representación gráfica de el conjunto solución para una inecuación.

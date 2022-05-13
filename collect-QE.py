@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/python3.10
 
 '''
     Description: extracts QE output data for scf, relax or dynamics calculations.
