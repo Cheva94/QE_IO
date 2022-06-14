@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.10
+#!/usr/bin/python3.10
 
 import numpy as np
 import pandas as pd

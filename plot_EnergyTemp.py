@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/python3.10
 
 import numpy as np
 import pandas as pd
@@ -53,6 +53,7 @@ def main():
 
     yE = pd.read_csv(file).iloc[:, 2]
     maxE = np.max(yE)
+    print(maxE)
     yE -= maxE
     yEs = gaussian_filter1d(yE, sigma=30)
 
@@ -92,6 +93,7 @@ def main():
     ax.xaxis.set_minor_locator(MultipleLocator(0.2))
 
     plt.savefig('Energy-vs-time')
+    plt.show()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

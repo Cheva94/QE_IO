@@ -17,6 +17,7 @@ def main():
 
     if args.dynamics:
         dt = 0.0004837761 # ps
+        # dt = 0.0005 # ps
         pTemp = 'temperature           ='
         pEnergy = 'const'
 
@@ -33,8 +34,6 @@ def main():
             Temp = [line.split()[2] for line in Temp]
             Energy = [line.split()[5] for line in Energy]
             Time = [(x+1)*dt for x in range(len(Temp))]
-            # print(len(Temp))
-            # print(len(Energy))
 
             df = DataFrame({'Time [ps]':Time, 'Temperature [K]':Temp, 'Ekin + Etot [Ry]':Energy})
             df.to_csv(f"{file.split('.out')[0]}.csv", sep=',', index=False)
