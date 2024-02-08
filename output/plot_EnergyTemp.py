@@ -31,7 +31,7 @@ plt.rcParams["legend.fancybox"] = True
 plt.rcParams["legend.fontsize"] = 30
 plt.rcParams["legend.edgecolor"] = 'black'
 
-plt.rcParams["figure.figsize"] = 12.5, 10
+plt.rcParams["figure.figsize"] = 25, 10
 plt.rcParams["figure.autolayout"] = True
 
 plt.rcParams["lines.linewidth"] = 1
@@ -47,53 +47,37 @@ def main():
     bottomT = args.y_axisT[0]
     topT = args.y_axisT[1]
 
-    x = pd.read_csv(file).iloc[:, 0]
+    ry2ev = 13.605693122994017
+
+    x = pd.read_csv(file).iloc[:, 0].to_numpy()
     yT = pd.read_csv(file).iloc[:, 1]
     yTs = gaussian_filter1d(yT, sigma=30)
 
     yE = pd.read_csv(file).iloc[:, 2]
+    yE *= ry2ev
     maxE = np.max(yE)
-    print(maxE)
+    print(f'Máxima energía: {maxE} eV')
+    print(f'Tiempo simulado: {x[-1]} ps')
     yE -= maxE
     yEs = gaussian_filter1d(yE, sigma=30)
 
+    fig, ax = plt.subplots(1, 2)
+
     ### TEMPERATURE
-    fig, ax = plt.subplots()
-
-    ax.plot(x, yT, ls='-')
-    ax.plot(x, yTs, c='black', lw=3, ls='-')
-    ax.set_xlabel('time [ps]')
-    ax.set_ylabel('Temperature [K]')
-    if (left != None) and (right != None):
-        ax.set_xlim(float(left), float(right))
-    if (bottomT != None) and (topT != None):
-        ax.set_ylim(float(bottomT), float(topT))
-        ax.yaxis.set_major_locator(MultipleLocator(10))
-        ax.yaxis.set_minor_locator(MultipleLocator(2))
-        ax.xaxis.set_major_locator(MultipleLocator(1))
-        ax.xaxis.set_minor_locator(MultipleLocator(0.2))
-
-    plt.savefig('Temp-vs-time')
+    ax[0].plot(x, yT, ls='-')
+    ax[0].plot(x, yTs, c='black', lw=3, ls='-')
+    ax[0].set_xlabel('time [ps]')
+    ax[0].set_ylabel('Temperature [K]')
 
     ### ENERGY
-    fig, ax = plt.subplots()
+    ax[1].plot(x, yE, ls='-')
+    ax[1].plot(x, yEs, c='black', lw=3, ls='-')
+    ax[1].set_xlabel('time [ps]')
+    ax[1].set_ylabel('Ekin + Etot [eV]')
+    ax[1].set_ylim(bottomE, topE)
+    ax[1].set_xlim(left, right)
 
-    ax.plot(x, yE, ls='-')
-    ax.plot(x, yEs, c='black', lw=3, ls='-')
-    ax.set_xlabel('time [ps]')
-    ax.set_ylabel('Energy [Ry]')
-    if (left != None) and (right != None):
-        ax.set_xlim(float(left), float(right))
-    if (bottomE != None) and (topE != None):
-        ax.set_ylim(float(bottomE), float(topE))
-        ax.yaxis.set_major_locator(MultipleLocator(0.1))
-        ax.yaxis.set_minor_locator(MultipleLocator(0.05))
-
-    ax.xaxis.set_major_locator(MultipleLocator(1))
-    ax.xaxis.set_minor_locator(MultipleLocator(0.2))
-
-    plt.savefig('Energy-vs-time')
-    plt.show()
+    plt.savefig(f'{file.split(".csv")[0]}.png')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -101,13 +85,13 @@ if __name__ == "__main__":
     parser.add_argument('input_file', help = "Path to the csv file.")
 
     parser.add_argument('-x', '--x_axis', nargs = 2, default = [None, None],
-                        help = "Choose range for X axis for both temperature and energy.")
+                        help = "Choose range for X axis for both temperature and energy.", type=float)
 
     parser.add_argument('-yE', '--y_axisE', nargs = 2, default = [None, None],
-                        help = "Choose range for Y axis on energy plot.")
+                        help = "Choose range for Y axis on energy plot.", type=float)
 
     parser.add_argument('-yT', '--y_axisT', nargs = 2, default = [None, None],
-                        help = "Choose range for Y axis on temperature plot.")
+                        help = "Choose range for Y axis on temperature plot.", type=float)
 
     args = parser.parse_args()
 
