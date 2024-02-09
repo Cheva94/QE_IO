@@ -57,7 +57,7 @@ def main():
                         maxIt.append(getline(f.name, ind))
 
             maxIt = int(maxIt[-1].split("ecut=")[0].split("iteration #")[1].strip())
-            O.write(f"{nodes}, {MPI}, {OMP}, {diag}, {diagSize}, {sticksTot}, {sticksMin}, {sticksMax}, {sticksRatio}, {KS}, {FFTd}, {FFTd}, {maxIt}, {WALL:.2f} \n")
+            O.write(f"{nodes}, {MPI}, {OMP}, {diag}, {diagSize}, {sticksTot}, {sticksMin}, {sticksMax}, {sticksRatio}, {KS}, {FFTd}, {FFTs}, {maxIt}, {WALL:.6f} \n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

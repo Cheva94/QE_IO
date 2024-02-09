@@ -61,21 +61,28 @@ def main():
     yE -= maxE
     yEs = gaussian_filter1d(yE, sigma=30)
 
-    fig, ax = plt.subplots(1, 2)
+    
+    _, ax = plt.subplots(1, 2)
 
     ### TEMPERATURE
     ax[0].plot(x, yT, ls='-')
     ax[0].plot(x, yTs, c='black', lw=3, ls='-')
     ax[0].set_xlabel('time [ps]')
     ax[0].set_ylabel('Temperature [K]')
+    if (left != None) and (right != None):
+        ax[0].set_xlim(float(left), float(right))
+    if (bottomT != None) and (topT != None):
+        ax[0].set_ylim(float(bottomT), float(topT))
 
     ### ENERGY
     ax[1].plot(x, yE, ls='-')
     ax[1].plot(x, yEs, c='black', lw=3, ls='-')
     ax[1].set_xlabel('time [ps]')
     ax[1].set_ylabel('Ekin + Etot [eV]')
-    ax[1].set_ylim(bottomE, topE)
-    ax[1].set_xlim(left, right)
+    if (left != None) and (right != None):
+        ax[1].set_xlim(float(left), float(right))
+    if (bottomE != None) and (topE != None):
+        ax[1].set_ylim(float(bottomE), float(topE))
 
     plt.savefig(f'{file.split(".csv")[0]}.png')
 
@@ -85,13 +92,13 @@ if __name__ == "__main__":
     parser.add_argument('input_file', help = "Path to the csv file.")
 
     parser.add_argument('-x', '--x_axis', nargs = 2, default = [None, None],
-                        help = "Choose range for X axis for both temperature and energy.", type=float)
+                        help = "Choose range for X axis for both temperature and energy.")
 
     parser.add_argument('-yE', '--y_axisE', nargs = 2, default = [None, None],
-                        help = "Choose range for Y axis on energy plot.", type=float)
+                        help = "Choose range for Y axis on energy plot.")
 
     parser.add_argument('-yT', '--y_axisT', nargs = 2, default = [None, None],
-                        help = "Choose range for Y axis on temperature plot.", type=float)
+                        help = "Choose range for Y axis on temperature plot.")
 
     args = parser.parse_args()
 
