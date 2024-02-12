@@ -84,6 +84,9 @@ def main():
     if (bottomE != None) and (topE != None):
         ax[1].set_ylim(float(bottomE), float(topE))
 
+    ax[1].xaxis.set_major_locator(MultipleLocator(1))
+    ax[1].xaxis.set_minor_locator(MultipleLocator(0.5))
+
     plt.savefig(f'{file.split(".csv")[0]}.png')
 
 if __name__ == "__main__":
